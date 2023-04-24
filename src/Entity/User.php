@@ -21,6 +21,12 @@ class User
      */
     private $idUser;
 
+
+    #[ORM\OneToMany(targetEntity: Yahya::class, mappedBy: 'user')]
+
+    private $ratings;
+
+
     /**
      * @var string
      *

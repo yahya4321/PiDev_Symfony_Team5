@@ -20,6 +20,7 @@ class ServiceType extends AbstractType
             ->add('servdesc',TextareaType::class)
             ->add('servprix')
             ->add('servdispo')
+            ->add('note')
             ->add('servville')
             ->add('servimg',FileType::class,array("data_class"=>null))
             ->add('catlib', EntityType::class, [

@@ -44,6 +44,8 @@
                                 <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Ajouter</button>
 
                             </a>
+                            <h5 class="card-title">Listes des services</h5>
+
 
                             <!-- Default Table -->
                             <table class="table">
@@ -55,6 +57,7 @@
 
                                     <th scope="col">ServPrix</th>
                                     <th scope="col">Categorie</th>
+                                    <th scope="col">QrCode</th>
 
                                     <th scope="col">Modifier</th>
                                     <th scope="col">Supprimer</th>
@@ -85,6 +88,9 @@
                                         <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.servimg) }}"/></td>
                                         <td>{{p.servprix}}</td>
                                         <td>{{p.catlib}}</td>
+                                        <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.qrcode) }}"/></td>
+
+                                        </td>
 
                                         <td>
                                             <a href="{{ path('modifierService',{servid:p.servid}) }}">
@@ -98,14 +104,24 @@
                                         </a></td>
                                         <td><a href="{{ path('detailServices',{servid:p.servid}) }}">
                                                 <i  class="bi bi-menu-app" style="color:gray"></i></a></td>
-                                        </a></td>                                    </tr>
+                                        </a></td>
+
+
+                                    </tr>
 
                                 {% endfor %}
 
 
                                 </tbody>
                             </table>
+                            {{ knp_pagination_render(listS, 'bootstrap_4_pagination.html.twig') }}
+
                             <!-- End Default Table Example -->
+                            <a href="{{ path('exportExcel') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-secondary">Exporter Excel</button>
+
+                            </a>
+
                         </div>
 
                     </div>

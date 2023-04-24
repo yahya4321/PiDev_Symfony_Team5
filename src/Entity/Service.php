@@ -58,6 +58,14 @@ class Service
      */
     private $servimg;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="QrCode", type="string", length=255, nullable=false)
+     */
+    private $qrcode;
+
     /**
      * @var float
      *
@@ -81,7 +89,14 @@ class Service
      *
 
      * @ORM\Column(name="CatLib", type="string", length=20, nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="catlib", referencedColumnName="catlib")
+     * })
      */
+
+
     private $catlib;
 
     /**
@@ -92,7 +107,17 @@ class Service
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
      * })
      */
-    private $idUser; //deja ma5douma hayki mregla
+    private $idUser;
+
+
+    #[ORM\OneToMany(targetEntity: Yahya::class, mappedBy: 'service')]
+
+    private $ratings;
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $note;
 
     /**
      * @return int
@@ -222,21 +247,49 @@ class Service
         $this->catlib = $catlib;
     }
 
-    /**
-     * @return \User
-     */
     public function getIdUser(): User
     {
         return $this->idUser;
     }
 
-    /**
-     * @param \User $idUser
-     */
+
     public function setIdUser(User $idUser): void
     {
         $this->idUser = $idUser;
     }
+
+    /**
+     * @return string
+     */
+    public function getQrcode(): string
+    {
+        return $this->qrcode;
+    }
+
+    /**
+     * @param string $qrcode
+     */
+    public function setQrcode(string $qrcode): void
+    {
+        $this->qrcode = $qrcode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param mixed $note
+     */
+    public function setNote($note): void
+    {
+        $this->note = $note;
+    }
+
 
 
 }

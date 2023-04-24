@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/../oussema/ouseemapidev/.idea/ouseemapidev.iml" filepath="$PROJECT_DIR$/../oussema/ouseemapidev/.idea/ouseemapidev.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/piDev.iml" filepath="$PROJECT_DIR$/.idea/piDev.iml" />
-    </modules>
-  </component>
-</project>

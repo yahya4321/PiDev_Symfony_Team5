@@ -40,4 +40,30 @@ class ServiceRepository extends ServiceEntityRepository
     }
 
 
+    //metier search
+
+    //using query builder
+    public function rechercheAvance($str) {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT P
+                FROM App\Entity\Service P
+                WHERE P.servlib LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+
+    }
+    //METIER 3
+    public function  findByTopServiceEvalues($val) {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder(); // dql
+        $query->select('p.id ,p.note')
+            ->from('App\Entity\Service','p')
+            ->orderBy('p.note','DESC')
+            ->setMaxResults(3);
+        $res = $query->getQuery();
+        return $res->execute();
+    }
+
 }
