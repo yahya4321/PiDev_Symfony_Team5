@@ -1,0 +1,78 @@
+{% extends 'baseBack.html.twig' %}
+{% block tableForm %}
+
+        <div class="row">
+            <div style="display: flex; align-items: center; justify-content: center; margin-top: 0px; padding: 10px;">
+                <div class="card" style="width: 80%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Ajout service</h5>
+
+                        {{ form_start(f, {attr: {novalidate: 'novalidate'}}) }}
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-4 col-form-label">Libellé</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.servlib, {attr: {class: 'form-control', placeholder: 'Entrer le libellé'}}) }}
+                                {{ form_errors(f.servlib, {attr: {class: 'text-danger'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Description</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.servdesc, {attr: {class: 'form-control', placeholder: 'Entrer la description'}}) }}
+                                {{ form_errors(f.servdesc, {attr: {class: 'text-danger'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-4 col-form-label">Disponibilité</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.servdispo, {attr: {class: 'form-control', placeholder: 'Entrer la disponibilité'}}) }}
+                                {{ form_errors(f.servdispo, {attr: {class: 'text-danger'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputNumber" class="col-sm-4 col-form-label">Image</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.servimg, {attr: {class: 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-4 col-form-label">Prix</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.servprix, {attr: {class: 'form-control', placeholder: 'Entrer le prix'}}) }}
+                                {{ form_errors(f.servprix, {attr: {class: 'text-danger'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-4 col-form-label">Catégorie</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.catlib, {attr: {class: 'form-control', placeholder: 'Sélectionner une catégorie'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-4 col-form-label">Ville</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(f.servville, {attr: {class: 'form-control', placeholder: 'Entrer la ville'}}) }}
+                                {{ form_errors(f.servprix, {attr: {class: 'text-danger'}}) }}
+                            </div>
+
+                            <br>
+                        <div class="row mt-4">
+                            <div class="col-md-8 offset-md-2 d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-success btn-rounded px-4 me-3">Enregistrer</button>
+                                <a href="{{ path('display_services') }}" class="btn btn-outline-danger btn-rounded px-3">
+                                    <i class="fas fa-arrow-left me-2"></i> Retour
+                                </a>
+                            </div>
+                        </div>
+
+
+
+
+                        {{ form_end(f) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+{% endblock %}

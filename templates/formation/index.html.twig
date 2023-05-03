@@ -1,0 +1,158 @@
+{% extends 'baseBack.html.twig' %}
+{% block tableForm %}
+
+        <section class="min-sec">
+            <div class="container">
+
+                <h1 class="text-center mb-4">Liste des formations</h1>
+                <div class="d-grid gap-1 col-lg-4">
+<a class="btn btn-info" href="{{ path('app_formation_new') }}">Creer nouvelle</a>
+</div>
+            <div class="row">
+
+                    {% for formation in formations %}
+
+                        <div class="col-md-4 col-sm-6 col-lg-6">
+                         <span>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{ formation.titrefr }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Niveau :</strong> {{ formation.niveau }}</p>
+                                    <p class="card-text"><strong>Type :</strong> {{ formation.type }}</p>
+                                    <p class="card-text"><strong>Contenu :</strong> {{ formation.contenu }}</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="{{ path('app_formation_show', {'idMat': formation.idMat}) }}" class="btn btn-primary">Voir plus</a>
+                                    <a href="{{ path('app_formation_edit', {'idMat': formation.idMat}) }}" class="btn btn-success">Modifier</a>
+                                    <a href="{{ path('app_formation_delete', {'idMat': formation.idMat }) }}" class="btn btn-danger">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+
+                         </span>
+                    {% else %}
+                        <div class="alert alert-info">Il n'y a pas encore de formations.</div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+             </div>
+              {% if formations|length > 1 %}
+    <div class="pagination">
+       <p class="theme-cl-2"> {{ knp_pagination_render(formations) }}</p>
+    </div>
+{% endif %}
+        </section>
+
+          <canvas id="myChart" style="width:50%;max-width:900px;margin-right:900px;"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script>
+    let confirmedContractsCount = 0;
+    let waitingContractsCount = 0;
+
+    {% for formation in formations %}
+        {% if formation.Niveau == "Debutant" %}
+            confirmedContractsCount++;
+        {% elseif formation.Niveau == "Moyen" %}
+            confirmedContractsCount++;
+        {% else %}
+            waitingContractsCount++;
+        {% endif %}
+    {% endfor %}
+
+    // Fonction pour générer des couleurs aléatoires
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 15)];
+        }
+        return color;
+    }
+
+    // Création des données pour le graphique
+    let chartData = {
+        labels: ["Debutant", "Moyen", "Expert"],
+        datasets: [{
+            data: [confirmedContractsCount, waitingContractsCount],
+            backgroundColor: ["#36A2EB", "#FF6384"],
+            borderWidth: 1,
+            borderColor: '#ddd',
+            hoverBorderColor: 'black'
+        }]
+    };
+
+    // Configuration des options du graphique
+    let chartOptions = {
+        title: {
+            display: true,
+            text: "Statistiques des formations envoyés",
+            fontSize: 18,
+            fontFamily: 'Arial',
+            fontColor: '#333'
+        },
+        legend: {
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: '#666',
+                    fontSize: 14,
+                    fontFamily: 'Arial'
+                },
+                gridLines: {
+                    color: "#eee",
+                    zeroLineColor: "#666",
+                    zeroLineWidth: 1,
+                    lineWidth: 1,
+                    borderDash: [2, 2]
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: '#666',
+                    fontSize: 14,
+                    fontFamily: 'Arial'
+                },
+                gridLines: {
+                    color: "transparent"
+                }
+            }]
+        }
+    };
+
+    // Création du graphique
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: chartOptions
+    });
+</script>
+<script>
+        function filterTable() {
+            const filter = document.getElementById('searchInput').value.toUpperCase();
+            const rows = document.querySelectorAll('table tr');
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i].querySelectorAll('td');
+                let visible = false;
+                for (let j = 0; j < cols.length; j++) {
+                    const cell = cols[j];
+                    if (cell.innerText.toUpperCase().indexOf(filter) > -1) {
+                        visible = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = visible ? '' : 'none';
+            }
+        }
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+    </script>
+{% endblock %}

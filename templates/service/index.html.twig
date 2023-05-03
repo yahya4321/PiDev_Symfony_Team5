@@ -1,0 +1,139 @@
+
+{% extends 'baseBack.html.twig' %}
+{% block tableForm %}
+
+
+
+
+
+        <section class="section">
+            <div class="container">
+                <div class="d-grid gap-1 col-lg-4">
+
+                <div class="row">
+
+                    <div class="card">
+                        {% for message in app.flashes('notice') %}
+                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                                 role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+
+                        {% for message in app.flashes('noticedelete') %}
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                 role="alert">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+
+
+                        <div class="card-body">
+
+                            <h2 class="card-title text-center">Liste des Services</h2>
+                            <a href="{{ path('ajouterService') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">
+                                    Ajouter
+                                </button>
+                            </a>
+
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="color:#7b68ee">Libellé</th>
+                                    <th scope="col" style="color:#7b68ee">Disponibilité</th>
+                                    <th scope="col" style="color:#7b68ee">Image</th>
+
+                                    <th scope="col" style="color:#7b68ee">Prix</th>
+                                    <th scope="col" style="color:#7b68ee">Catégorie</th>
+                                    <th scope="col" style="color:#7b68ee">QrCode</th>
+
+                                    <th scope="col">Modifier</th>
+                                    <th scope="col">Supprimer</th>
+                                    <th scope="col">Détails</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {% if listS | length == 0 %}
+                                            <p style="text-align: center">Aucun Service trouvé !</p>
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+
+                                {% for s in listS %}
+                                    <tr>
+                                        <td>{{ s.servlib }}</td>
+                                        <td>{{ s.servdispo }}</td>
+
+                                        <td><img style="width: 75px; height: 55px; padding: 5px;"
+                                                 src="{{ asset('uploads/'~s.servimg) }}"/></td>
+                                        <td>{{ s.servprix }}</td>
+                                        <td>{{ s.catlib }}</td>
+                                        <td><img style="width: 75px; height: 55px; padding: 5px;"
+                                                 src="{{ asset('uploads/'~s.qrcode) }}"/></td>
+
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ path('modifierService',{servid:s.servid}) }}">
+                                                <i class="bi bi-pencil" style="color: #0a58ca;"></i></a></td>
+                                        <td>
+                                            <a href="javascript:void(0)"
+                                               onclick="if(confirm('Voulez-vous vraiment le supprimer ?')){window.location='{{ path('suppressionService', {'servid': s.servid }) }}';}">
+
+                                                <i class="bi bi-trash" style="color:red;"></i></a></td>
+                                        </a></td>
+                                        <td><a href="{{ path('detailServices',{servid:s.servid}) }}">
+                                                <i class="bi bi-menu-app" style="color:gray"></i></a></td>
+                                        </a></td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            {{ knp_pagination_render(listS, 'bootstrap_4_pagination.html.twig') }}
+
+                            <!-- End Default Table Example -->
+                            <a href="{{ path('exportExcel') }}">
+                                <button type="button" style="float: right;padding: 10px;"
+                                        class="btn btn-outline-secondary">Exporter Excel
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+        </section>
+
+
+
+
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+    <link
+            href="{{ asset('front/css/plugins.css')}}" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <link
+            href="{{ asset('front/css/styles.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+{% endblock %}

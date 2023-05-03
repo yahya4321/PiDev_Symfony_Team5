@@ -1,0 +1,69 @@
+{% extends "baseBack.html.twig" %}
+
+{% block content %}
+
+    <div class="content-page mt-5">
+        <div class="content">
+            <div class="container-fluid">
+
+
+                <div class="content-page">
+                    <div class="content">
+                        <div class="container-fluid">
+
+
+                            <div class="row justify-content-center">
+
+                                <div class="col-12 col-md-9 col-lg-3 offset-md-1">
+
+                                    <div class="card shadow-lg mb-4">
+                                        <div class="d-flex justify-content-center">
+                                            <img class="card-img-top img-fluid" src="{{ asset('uploads/'~image) }}" alt="Card image cap" style="max-width: 100%; height: auto;">
+                                        </div>
+
+                                        <div class="card-body text-center">
+                                            <h4 class="card-title text-danger" style="font-size: 26px;">Service numéro : {{ Id }}</h4>
+                                            <div class="row mb-2">
+                                                <div class="col-6 font-weight-bold text-right" style="color:#636363;">Libellé :</div>
+                                                <div class="col-6 text-left" style="color:#333333;">{{ Libille }}</div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-6 font-weight-bold text-right" style="color:#636363;">Description :</div>
+                                                <div class="col-6 text-left" style="color:#333333;">{{ Description }}</div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-6 font-weight-bold text-right" style="color:#636363;">Disponibilité:</div>
+                                                <div class="col-6 text-left" style="color:#333333;">
+                                                    {% if Servdispo == 1 %}
+                                                        <span style="color:#64b5f6;">disponible</span>
+                                                    {% else %}
+                                                        <span style="color:#f44336;">non disponible</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-6 font-weight-bold text-right" style="color:#636363;">Prix :</div>
+                                                <div class="col-6 text-left" style="color:#333333;">{{ Prix }} TND</div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-6 font-weight-bold text-right" style="color:#636363;">Catégorie :</div>
+                                                <div class="col-6 text-left" style="color:#333333;">{{ Categorie }}</div>
+                                            </div>
+                                            <hr class="my-3" style="border-top: 1px solid #d9d9d9;">
+
+                                            <div class="text-center">
+                                                <a href="{{ path('display_services') }}" class="btn btn-outline-danger btn-rounded px-3">
+                                                    <i class="fas fa-arrow-left me-2"></i> Retour
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

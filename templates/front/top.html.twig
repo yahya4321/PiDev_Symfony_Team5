@@ -1,0 +1,84 @@
+
+
+{% block categories %}
+
+{% endblock %}
+
+{% block candidate %}
+
+{% endblock %}
+
+{% block body %}
+    <section class="min-sec">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-9">
+                    <div class="sec-heading">
+                        <h2>Top 3 Services <span class="theme-cl-2"></span></h2>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <!-- Single Item -->
+                {% for s in topfive %}
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+                        <div class="job_grid_02">
+                            <div class="jb_grid_01_thumb">
+                                <a href="employer-detail.html"><img src="{{ asset('uploads/'~s.servimg) }}" class="img-fluid mx-auto d-block" alt=""></a>
+                            </div>
+
+                            <div class="jobs-like"></div>
+
+                            <div class="jb_types fulltime">
+                                {% if s.servdispo == 0 %}
+                                    <div style="color: red;">Non disponible</div>
+                                {% else %}
+                                    <div style="color: blue;"> disponible</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="jb_grid_01_caption">
+                                <h4 class="_jb_title"><a href="job-detail.html">{{ s.servlib }}</a></h4>
+                                <div class="_emp_jb">{{ s.servdesc }}</div>
+                            </div>
+
+                            <div class="jb_grid_01_footer">
+                                <a href="{{ path('detailServices',{servid:s.servid}) }}" class="_jb_apply">Détails</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+    <link
+            href="{{ asset('front/css/plugins.css')}}" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <link
+            href="{{ asset('front/css/styles.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+{% endblock %}
+
